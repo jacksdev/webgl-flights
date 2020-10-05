@@ -42,7 +42,7 @@ class App extends React.Component {
     .then(res => res.json())
     .then(function(myJson) {
       let data = myJson.states;
-      console.log(typeof data)
+      console.log(data[0])
       return app.setState({
         planes: data.map(d => ({
           callsign: d[1],
