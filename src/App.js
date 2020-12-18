@@ -8,6 +8,7 @@ import {StaticMap} from 'react-map-gl';
 import Airports from 'airports';
 
 import PlaneIcon from './images/plane.png';
+import arIcon from './images/ar.png';
 // Set your mapbox access token here
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamZyb2xvdiIsImEiOiJjanFta2JhMTAzdGVsNDRsYjZjbnB2aGk2In0.E1v_EBQE7FeLEx_q0S3ELg';
 
@@ -27,34 +28,45 @@ const initialViewState = {
 class App extends React.Component {
 
   state = {
-    planes: []
+    planes: [],
+    airports:[]
   }
+
+  
 
 
   componentDidMount(){
 
-    const cleanedAirprts = Airports.filter(a => a.type == 'airport');
-
-    console.log(cleanedAirprts)
-
+    this.setAirports()
     this.fetchFlightData()
   }
 
+  setAirports = () => {
 
+    const cleanedAirprts = Airports.filter(a => a.type === 'airport');
+    console.log(cleanedAirprts)
+
+    return this.setState({
+      airports: cleanedAirprts.map(d => ({
+        iata: d.iata,
+        iso: d.iso,
+        long: Number(d.lon),
+        lat: Number(d.lat)
+      }))
+    })
+
+  }
 
 
   fetchFlightData = () => {
 
-    let app = this
-
-    
-    
+    let app = this;
 
     fetch('https://opensky-network.org/api/states/all')
     .then(res => res.json())
     .then(function(myJson) {
       let data = myJson.states;
-      console.log(data[0])
+      //console.log(data[0])
       return app.setState({
         planes: data.map(d => ({
           callsign: d[1],
@@ -71,9 +83,27 @@ class App extends React.Component {
   }
   
 
-  render() {
+  render(cleanedAirprts) {
 
-    const layer = new IconLayer({
+    const layers = [
+      new IconLayer({
+        id: 'icon_airport',
+        data: this.state.airports,
+        pickable: false,
+        iconAtlas: arIcon,
+        iconMapping: {
+          marker: {x: 0, y: 0, width: 200, height: 200, mask: false}
+        },
+        getIcon: d => "marker",
+        sizeScale: 10,
+        opacity: 0.9,
+        getPosition: d => [d.long, d.lat]
+        // onHover: ({d, x, y}) => {
+        //   const tooltip = `${d.callsign}\n${d.orgin}`;
+  
+        // }
+      }),
+      new IconLayer({
       id: 'planes',
       data: this.state.planes,
       pickable: false,
@@ -82,15 +112,17 @@ class App extends React.Component {
         marker: {x: 0, y: 0, width: 532, height: 532, mask: false}
       },
       getIcon: d => "marker",
-      sizeScale: 35,
-      opacity: 0.3,
+      sizeScale: 25,
+      opacity: 1,
       getPosition: d => [d.long, d.lat],
       getAngle: d => 65 + (d.true_track * 180) / Math.PI,
       // onHover: ({d, x, y}) => {
       //   const tooltip = `${d.callsign}\n${d.orgin}`;
 
       // }
-    });
+    }),
+   
+  ]
 
     
 
@@ -98,7 +130,7 @@ class App extends React.Component {
       <DeckGL
         initialViewState={initialViewState}
         controller={true}
-        layers={layer}
+        layers={layers}
       >
         <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
       </DeckGL>
