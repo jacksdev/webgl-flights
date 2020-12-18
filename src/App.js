@@ -5,6 +5,8 @@ import DeckGL, {IconLayer} from 'deck.gl';
 import * as d3 from 'd3';
 import {StaticMap} from 'react-map-gl';
 
+import Airports from 'airports';
+
 import PlaneIcon from './images/plane.png';
 // Set your mapbox access token here
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamZyb2xvdiIsImEiOiJjanFta2JhMTAzdGVsNDRsYjZjbnB2aGk2In0.E1v_EBQE7FeLEx_q0S3ELg';
@@ -24,19 +26,29 @@ const initialViewState = {
 
 class App extends React.Component {
 
-
   state = {
     planes: []
   }
 
 
   componentDidMount(){
+
+    const cleanedAirprts = Airports.filter(a => a.type == 'airport');
+
+    console.log(cleanedAirprts)
+
     this.fetchFlightData()
   }
+
+
+
 
   fetchFlightData = () => {
 
     let app = this
+
+    
+    
 
     fetch('https://opensky-network.org/api/states/all')
     .then(res => res.json())
