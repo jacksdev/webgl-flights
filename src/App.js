@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import './App.css';
 
 import DeckGL, {IconLayer} from 'deck.gl';
-import * as d3 from 'd3';
+
 import {StaticMap} from 'react-map-gl';
 
 import Airports from 'airports';
@@ -13,7 +13,7 @@ import arIcon from './images/ar.png';
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamZyb2xvdiIsImEiOiJjanFta2JhMTAzdGVsNDRsYjZjbnB2aGk2In0.E1v_EBQE7FeLEx_q0S3ELg';
 
 // Initial viewport settings
-const initialViewState = {
+let initialViewState = {
   longitude: -122.41669,
   latitude: 37.7853,
   zoom: 5,
@@ -29,7 +29,10 @@ class App extends React.Component {
 
   state = {
     planes: [],
-    airports:[]
+    airports:[],
+    hoveredPlane:{
+      ico: ''
+    }
   }
 
   
@@ -40,6 +43,8 @@ class App extends React.Component {
     this.setAirports()
     this.fetchFlightData()
   }
+
+
 
   setAirports = () => {
 
@@ -69,6 +74,7 @@ class App extends React.Component {
       //console.log(data[0])
       return app.setState({
         planes: data.map(d => ({
+          ico24: d[0],
           callsign: d[1],
           long: d[5],
           lat: d[6],
@@ -95,7 +101,7 @@ class App extends React.Component {
           marker: {x: 0, y: 0, width: 200, height: 200, mask: false}
         },
         getIcon: d => "marker",
-        sizeScale: 10,
+        sizeScale: 8,
         opacity: 0.9,
         getPosition: d => [d.long, d.lat]
         // onHover: ({d, x, y}) => {
@@ -106,7 +112,7 @@ class App extends React.Component {
       new IconLayer({
       id: 'planes',
       data: this.state.planes,
-      pickable: false,
+      pickable: true,
       iconAtlas: PlaneIcon,
       iconMapping: {
         marker: {x: 0, y: 0, width: 532, height: 532, mask: false}
@@ -116,13 +122,42 @@ class App extends React.Component {
       opacity: 1,
       getPosition: d => [d.long, d.lat],
       getAngle: d => 65 + (d.true_track * 180) / Math.PI,
-      // onHover: ({d, x, y}) => {
-      //   const tooltip = `${d.callsign}\n${d.orgin}`;
+      onHover: (d) => {
 
-      // }
-    }),
+        if(d.object){
+          this.setState((state) => {
+            // Important: read `state` instead of `this.state` when updating.
+            return {hoveredPlane:{
+              ico: d.object.ico24,
+              callsign: d.object.callsign,
+              velocity: d.object.velocity,
+              alt: d.object.alt
+            }}
+          });
+          console.log(d.object)
+        }
+      
+      }
+    })
    
   ]
+
+
+  const divStyle = {
+    color: 'blue',
+    fontSize: 35,
+    position: 'absolute'
+  };
+
+  function Welcome(props) {
+    return <div style={divStyle}>
+
+      Plane: {props.plane.callsign} <br />
+      Altitude: {props.plane.alt} feet <br />
+      Velocity: {props.plane.velocity} knots<br />
+
+      </div>;
+  }
 
     
 
@@ -133,6 +168,7 @@ class App extends React.Component {
         layers={layers}
       >
         <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
+        <Welcome plane={this.state.hoveredPlane} />
       </DeckGL>
     );
   }
