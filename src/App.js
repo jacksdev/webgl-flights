@@ -167,7 +167,8 @@ class App extends React.Component {
         controller={true}
         layers={layers}
       >
-        <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
+        <StaticMap width="100%"
+      height="100%" mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
         <Welcome plane={this.state.hoveredPlane} />
       </DeckGL>
     );
