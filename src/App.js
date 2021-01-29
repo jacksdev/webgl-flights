@@ -5,6 +5,9 @@ import DeckGL, {IconLayer} from 'deck.gl';
 
 import {StaticMap} from 'react-map-gl';
 
+import { css } from "@emotion/core";
+import DotLoader from "react-spinners/DotLoader";
+
 import Airports from 'airports';
 
 import PlaneIcon from './images/plane.png';
@@ -150,9 +153,32 @@ class App extends React.Component {
 
   const divStyle = {
     color: 'blue',
-    fontSize: 35,
-    position: 'absolute'
+    fontSize: 35
   };
+
+  const loadScreenCss = {
+    margin:'0',
+    background:'#eeeeee',
+    width:'100%',
+    height:'100%',
+    position: 'absolute',
+  };
+
+  const loadModalCss = {
+    padding: '50px',
+    width: '250px',
+    textAlign: 'center',
+    top:'150px',
+    margin: '0 auto',
+    position:'relative'
+  }
+
+  const override = css`
+    display: inline-block;
+    margin: 0 auto;
+    color: #01a7f9;
+  `;
+
 
   function Welcome(props) {
     return <div style={divStyle}>
@@ -164,8 +190,22 @@ class App extends React.Component {
       </div>;
   }
 
+  function LoadScreen(props) {
+    return <div style={loadScreenCss}>
+      
+      <div style={loadModalCss}>
+        Loading flight data
+        
+        <DotLoader color='#01a7f9' css={override} size={65} />
+
+      </div>
+      
+
+      </div>;
+  }
+
     if(this.state.loading){
-      return "LOADING DATA"
+      return <LoadScreen />
     }
     else {
       return (
