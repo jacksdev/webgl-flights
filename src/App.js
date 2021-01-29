@@ -30,6 +30,7 @@ let initialViewState = {
 class App extends React.Component {
 
   state = {
+    loading:true,
     planes: [],
     airports:[],
     hoveredPlane:{
@@ -50,9 +51,9 @@ class App extends React.Component {
 
   setAirports = () => {
 
-    const cleanedAirprts = Airports.filter(a => a.type === 'airport');
-    console.log(cleanedAirprts)
 
+    const cleanedAirprts = Airports.filter(a => a.type === 'airport');
+  
     return this.setState({
       airports: cleanedAirprts.map(d => ({
         iata: d.iata,
@@ -72,9 +73,12 @@ class App extends React.Component {
     fetch('https://opensky-network.org/api/states/all')
     .then(res => res.json())
     .then(function(myJson) {
+
+   
       let data = myJson.states;
-      //console.log(data[0])
+  
       return app.setState({
+        loading: false,
         planes: data.map(d => ({
           ico24: d[0],
           callsign: d[1],
@@ -136,7 +140,6 @@ class App extends React.Component {
               alt: d.object.alt
             }}
           });
-          console.log(d.object)
         }
       
       }
@@ -161,20 +164,26 @@ class App extends React.Component {
       </div>;
   }
 
+    if(this.state.loading){
+      return "LOADING DATA"
+    }
+    else {
+      return (
+        <DeckGL
+          initialViewState={initialViewState}
+          controller={true}
+          layers={layers}
+        >
+          <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} 
+           />
+  
+          {/* <Welcome plane={this.state.hoveredPlane} /> */}
+        </DeckGL>
+      );
+    }
+      
+
     
-
-    return (
-      <DeckGL
-        initialViewState={initialViewState}
-        controller={true}
-        layers={layers}
-      >
-        <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} 
-         />
-
-        {/* <Welcome plane={this.state.hoveredPlane} /> */}
-      </DeckGL>
-    );
   }
 }
 
