@@ -10,16 +10,18 @@ import Airports from 'airports';
 import PlaneIcon from './images/plane.png';
 import arIcon from './images/ar.png';
 // Set your mapbox access token here
-const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamZyb2xvdiIsImEiOiJjanFta2JhMTAzdGVsNDRsYjZjbnB2aGk2In0.E1v_EBQE7FeLEx_q0S3ELg';
+const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamZyb2xvdiIsImEiOiJja2toaTIxOGYwMjl1MnVtbjQxcG94OG8xIn0.kI_ZUnQzjhvaOATGXkahMQ';
 
 // Initial viewport settings
 let initialViewState = {
-  longitude: -122.41669,
-  latitude: 37.7853,
-  zoom: 5,
-  pitch: 36,
-  bearing: 0
+  altitude: 1.5,
+  bearing: 23.484374999999996,
+  longitude: -100.0143893527711,
+  latitude: 36.96157896529295,
+  zoom: 3.903882166166096,
+  pitch: 57.30605204596854
 };
+
 
 // Data to be used by the LineLayer
 
@@ -167,9 +169,10 @@ class App extends React.Component {
         controller={true}
         layers={layers}
       >
-        <StaticMap width="100%"
-      height="100%" mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
-        <Welcome plane={this.state.hoveredPlane} />
+        <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} 
+         />
+
+        {/* <Welcome plane={this.state.hoveredPlane} /> */}
       </DeckGL>
     );
   }
