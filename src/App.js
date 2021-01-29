@@ -177,7 +177,7 @@ class App extends React.Component {
           <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} 
            />
   
-          {/* <Welcome plane={this.state.hoveredPlane} /> */}
+           <Welcome plane={this.state.hoveredPlane} />  
         </DeckGL>
       );
     }
