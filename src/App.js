@@ -15,6 +15,8 @@ import arIcon from './images/ar.png';
 // Set your mapbox access token here
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamZyb2xvdiIsImEiOiJja2toaTIxOGYwMjl1MnVtbjQxcG94OG8xIn0.kI_ZUnQzjhvaOATGXkahMQ';
 
+
+
 // Initial viewport settings
 let initialViewState = {
   altitude: 1.5,
@@ -95,6 +97,8 @@ class App extends React.Component {
       })
     });
     setTimeout(this.fetchFlightData, 10 * 1000)
+
+    
   }
   
 
@@ -152,9 +156,16 @@ class App extends React.Component {
 
 
   const divStyle = {
-    color: 'blue',
-    fontSize: 35
-  };
+    margin:'25px',
+    position:'absolute',
+    display:'block',
+    padding:'30px',
+    background:'#eee',
+    fontFamily:'Lato',
+    fontSize:'20px',
+    boxShadow: '2px 5px 33px rgba(104, 145, 163, 0.3)',
+    lineHeight:'32px'
+  }
 
   const loadScreenCss = {
     margin:'0',
@@ -170,11 +181,22 @@ class App extends React.Component {
     textAlign: 'center',
     top:'150px',
     margin: '0 auto',
-    position:'relative'
+    position:'relative',
+    fontFamily:'Lato',
+    fontSize:'20px',
+    fontWeight:'400',
+    color: '#737171'
+  }
+
+  const infoCss = {
+    fontSize:'20px',
+    color: '#0c7997',
+    fontWeight:'bold'
   }
 
   const override = css`
-    display: inline-block;
+    display: block;
+    top: 20px;
     margin: 0 auto;
     color: #01a7f9;
   `;
@@ -183,9 +205,9 @@ class App extends React.Component {
   function Welcome(props) {
     return <div style={divStyle}>
 
-      Plane: {props.plane.callsign} <br />
-      Altitude: {props.plane.alt} feet <br />
-      Velocity: {props.plane.velocity} knots<br />
+      Plane: <span style={infoCss}>{props.plane.callsign}</span> <br />
+      Altitude: <span style={infoCss}>{props.plane.alt} feet</span> <br />
+      Velocity: <span style={infoCss}>{props.plane.velocity} knots</span><br />
 
       </div>;
   }
@@ -196,7 +218,7 @@ class App extends React.Component {
       <div style={loadModalCss}>
         Loading flight data
         
-        <DotLoader color='#01a7f9' css={override} size={65} />
+        <DotLoader color='#0c7997' css={override} size={50} />
 
       </div>
       
@@ -209,16 +231,24 @@ class App extends React.Component {
     }
     else {
       return (
+        <>
+        
+
         <DeckGL
           initialViewState={initialViewState}
           controller={true}
           layers={layers}
         >
+          
+          
           <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} 
            />
+
+          <Welcome plane={this.state.hoveredPlane} />  
   
-           <Welcome plane={this.state.hoveredPlane} />  
+          
         </DeckGL>
+        </>
       );
     }
       
