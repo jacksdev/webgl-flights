@@ -79,7 +79,8 @@ class App extends React.Component {
     .then(res => res.json())
     .then(function(myJson) {
 
-   
+      
+
       let data = myJson.states;
   
       return app.setState({
@@ -136,8 +137,17 @@ class App extends React.Component {
       getPosition: d => [d.long, d.lat],
       getAngle: d => 65 + (d.true_track * 180) / Math.PI,
       onHover: (d) => {
-
+        
+     
+        
         if(d.object){
+
+          fetch(`https://opensky-network.org/api/states/all`)
+          .then(response => response.json())
+          .then(data => console.log(data));
+
+         
+
           this.setState((state) => {
             // Important: read `state` instead of `this.state` when updating.
             return {hoveredPlane:{
