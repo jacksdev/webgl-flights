@@ -40,6 +40,11 @@ class App extends React.Component {
     airports:[],
     hoveredPlane:{
       ico: ''
+    },
+    hoveredAirport:{
+      name: '',
+      lat:'',
+      long:''
     }
   }
 
@@ -61,6 +66,7 @@ class App extends React.Component {
   
     return this.setState({
       airports: cleanedAirprts.map(d => ({
+        name: d.name,
         iata: d.iata,
         iso: d.iso,
         long: Number(d.lon),
@@ -77,12 +83,10 @@ class App extends React.Component {
 
     fetch('https://opensky-network.org/api/states/all')
     .then(res => res.json())
-    .then(function(myJson) {
-
-      
+    .then(function(myJson) {      
 
       let data = myJson.states;
-  
+
       return app.setState({
         loading: false,
         planes: data.map(d => ({
@@ -98,8 +102,6 @@ class App extends React.Component {
       })
     });
     setTimeout(this.fetchFlightData, 10 * 1000)
-
-    
   }
   
 
@@ -109,19 +111,36 @@ class App extends React.Component {
       new IconLayer({
         id: 'icon_airport',
         data: this.state.airports,
-        pickable: false,
+        pickable: true,
         iconAtlas: arIcon,
         iconMapping: {
           marker: {x: 0, y: 0, width: 200, height: 200, mask: false}
         },
         getIcon: d => "marker",
-        sizeScale: 8,
+        sizeScale: 5,
         opacity: 0.9,
-        getPosition: d => [d.long, d.lat]
-        // onHover: ({d, x, y}) => {
-        //   const tooltip = `${d.callsign}\n${d.orgin}`;
+        getPosition: d => [d.long, d.lat],
+        onHover: (d) => {
+
+          if(d.object){
+            console.log(d.object.name)
+          }
+      
+          
+        
+          // if(d){
   
-        // }
+          //   this.setState((state) => {
+          //     // Important: read `state` instead of `this.state` when updating.
+          //     return {hoveredAirport:{
+          //       name: d.iata,
+          //       lat: d.lat,
+          //       long: d.long
+          //     }}
+          //   });
+          // }
+        
+        }
       }),
       new IconLayer({
       id: 'planes',
@@ -137,16 +156,8 @@ class App extends React.Component {
       getPosition: d => [d.long, d.lat],
       getAngle: d => 65 + (d.true_track * 180) / Math.PI,
       onHover: (d) => {
-        
-     
-        
+      
         if(d.object){
-
-          fetch(`https://opensky-network.org/api/states/all`)
-          .then(response => response.json())
-          .then(data => console.log(data));
-
-         
 
           this.setState((state) => {
             // Important: read `state` instead of `this.state` when updating.
@@ -225,15 +236,15 @@ class App extends React.Component {
   function LoadScreen(props) {
     return <div style={loadScreenCss}>
       
-      <div style={loadModalCss}>
-        Loading flight data
-        
-        <DotLoader color='#0c7997' css={override} size={50} />
+            <div style={loadModalCss}>
+              Loading flight data
+              
+              <DotLoader color='#0c7997' css={override} size={50} />
 
-      </div>
-      
+            </div>
+            
 
-      </div>;
+          </div>;
   }
 
     if(this.state.loading){
