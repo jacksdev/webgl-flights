@@ -260,8 +260,7 @@ class App extends React.Component {
           controller={true}
           layers={layers}
         >
-          
-          
+
           <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} 
            />
 
