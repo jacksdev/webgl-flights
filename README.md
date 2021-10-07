@@ -12,6 +12,6 @@ Simple flight tracker that generates real-time plane position on a map
 
 
 ## Demo
-[jacks-flight-data.netlify.app](https://jacks-flight-data.netlify.app/) 
+[jacks-flight-data.netlify.app](https://jacks-flight-data.netlify.app/) &#128279;
 
 ![](https://i.imgur.com/c3LxXM7.jpg)
