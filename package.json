@@ -6,6 +6,7 @@
     "airports": "github:jbrooksuk/JSON-Airports",
     "d3": "^5.7.0",
     "deck.gl": "^6.4.10",
+    "framer-motion": "^4.1.17",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-map-gl": "^4.0.5",
