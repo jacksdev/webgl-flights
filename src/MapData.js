@@ -2,8 +2,8 @@ import React from 'react';
 import DeckGL, {IconLayer} from 'deck.gl';
 import {StaticMap} from 'react-map-gl';
 
-import { css } from "@emotion/core";
-import DotLoader from "react-spinners/DotLoader";
+// import { css } from "@emotion/core";
+// import DotLoader from "react-spinners/DotLoader";
 
 import Airports from 'airports';
 
@@ -43,14 +43,13 @@ export default class App extends React.Component {
   
   componentDidMount(){
 
-    this.setAirports()
     this.fetchFlightData()
+		this.setAirports();
   }
 
 
 
   setAirports = () => {
-
 
     const cleanedAirprts = Airports.filter(a => a.type === 'airport');
   
@@ -63,7 +62,6 @@ export default class App extends React.Component {
         lat: Number(d.lat)
       }))
     })
-
   }
 
 
@@ -76,6 +74,8 @@ export default class App extends React.Component {
     .then(function(myJson) {      
 
       let data = myJson.states;
+
+			
 
       return app.setState({
         loading: false,
@@ -90,7 +90,10 @@ export default class App extends React.Component {
           true_track: d[10]
         }))
       })
-    });
+    })
+		.catch((error) => {
+			console.error('Error:', error);
+		});
     setTimeout(this.fetchFlightData, 10 * 1000)
   }
 
@@ -215,26 +218,26 @@ export default class App extends React.Component {
 }
 
 
-const loadScreenCss = {
-  margin:'0',
-  background:'#eeeeee',
-  width:'100%',
-  height:'100%',
-  position: 'absolute',
-};
+// const loadScreenCss = {
+//   margin:'0',
+//   background:'#eeeeee',
+//   width:'100%',
+//   height:'100%',
+//   position: 'absolute',
+// };
 
-const loadModalCss = {
-  padding: '50px',
-  width: '250px',
-  textAlign: 'center',
-  top:'150px',
-  margin: '0 auto',
-  position:'relative',
-  fontFamily:'Lato',
-  fontSize:'20px',
-  fontWeight:'400',
-  color: '#737171'
-}
+// const loadModalCss = {
+//   padding: '50px',
+//   width: '250px',
+//   textAlign: 'center',
+//   top:'150px',
+//   margin: '0 auto',
+//   position:'relative',
+//   fontFamily:'Lato',
+//   fontSize:'20px',
+//   fontWeight:'400',
+//   color: '#737171'
+// }
 
 // const infoCss = {
 //   fontSize:'20px',
@@ -242,9 +245,9 @@ const loadModalCss = {
 //   fontWeight:'bold'
 // }
 
-const override = css`
-  display: block;
-  top: 20px;
-  margin: 0 auto;
-  color: #01a7f9;
-`;
+// const override = css`
+//   display: block;
+//   top: 20px;
+//   margin: 0 auto;
+//   color: #01a7f9;
+// `;
