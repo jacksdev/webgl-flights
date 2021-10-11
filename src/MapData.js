@@ -2,8 +2,8 @@ import React from 'react';
 import DeckGL, {IconLayer} from 'deck.gl';
 import {StaticMap} from 'react-map-gl';
 
-// import { css } from "@emotion/core";
-// import DotLoader from "react-spinners/DotLoader";
+import { css } from "@emotion/core";
+import DotLoader from "react-spinners/DotLoader";
 
 import Airports from 'airports';
 
@@ -19,7 +19,7 @@ let initialViewState = {
   bearing: 23.484374999999996,
   longitude: -100.0143893527711,
   latitude: 36.96157896529295,
-  zoom: 3.903882166166096,
+  zoom: 4.5,
   pitch: 57.30605204596854
 };
 
@@ -171,50 +171,28 @@ export default class App extends React.Component {
 
 
 
-  // function LoadScreen(props) {
-  //   return <div style={loadScreenCss}>
-      
-  //           <div style={loadModalCss}>
-  //             Loading flight data
-              
-  //             <DotLoader color='#0c7997' css={override} size={50} />
+	return (
+		<>    
+		{/* if(this.state.loading){
+      <DotLoader color='#0c7997' css={override} size={50} />
+    } */}
+		
+		<DeckGL
+			initialViewState={initialViewState}
+			controller={true}
+			layers={layers}
+		> 
+		
+		
+		<StaticMap  mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
 
-  //           </div>
-            
+			{/* <Welcome plane={this.state.hoveredPlane} />   */}
 
-  //         </div>;
-  // }
-
-    // if(this.state.loading){
-    //   return <LoadScreen />
-    // }
-    // else {
-      return (
-        <>    
-
-        
-        <DeckGL
-          initialViewState={initialViewState}
-          controller={true}
-          layers={layers}
-        > 
-
-          
-
-          <StaticMap  mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} 
-           />
-
-          {/* <Welcome plane={this.state.hoveredPlane} />   */}
-  
-          
-        </DeckGL>
-        </>
-      );
-    // }
-      
-
-    
-  }
+			
+		</DeckGL>
+		</>
+	);
+}
 }
 
 
@@ -226,18 +204,18 @@ export default class App extends React.Component {
 //   position: 'absolute',
 // };
 
-// const loadModalCss = {
-//   padding: '50px',
-//   width: '250px',
-//   textAlign: 'center',
-//   top:'150px',
-//   margin: '0 auto',
-//   position:'relative',
-//   fontFamily:'Lato',
-//   fontSize:'20px',
-//   fontWeight:'400',
-//   color: '#737171'
-// }
+const loadModalCss = {
+  padding: '50px',
+  width: '250px',
+  textAlign: 'center',
+  top:'150px',
+  margin: '0 auto',
+  position:'relative',
+  fontFamily:'Lato',
+  fontSize:'20px',
+  fontWeight:'400',
+  color: '#737171'
+}
 
 // const infoCss = {
 //   fontSize:'20px',
@@ -245,9 +223,9 @@ export default class App extends React.Component {
 //   fontWeight:'bold'
 // }
 
-// const override = css`
-//   display: block;
-//   top: 20px;
-//   margin: 0 auto;
-//   color: #01a7f9;
-// `;
+const override = css`
+
+  display: block;
+  margin: 300px auto;
+  color: #01a7f9;
+`;
