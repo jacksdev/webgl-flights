@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from "framer-motion";
 
 
+
 const topHeaderCSS = {
   position:'absolute',
   height: '80px',
@@ -14,24 +15,30 @@ const topHeaderCSS = {
 
 const headerFont = {
   fontFamily:'Merriweather',
+  display:'inline-block',
   fontSize:'20px',
   lineHeight:'32px',
-  paddingTop:'20px',
+  paddingTop:'30px',
   paddingLeft:'20px',
-  color:'#b4d2d7',
+  color:'#9c9c9c',
+  opacity:'0'
   // border:'1px solid red'
 }
 
 
 export default function TopHeader() {
-  return <motion.span  
+  return <motion.div  
               animate={{top:0}}
               transition={{ duration: 1, delay: 1.3 }}
               style={topHeaderCSS}>
 
-         <div style={headerFont}>
-            Real Flights
-        </div>
-      </motion.span>;
+              <motion.span 
+                    animate={{opacity:1}}
+                    transition={{ duration: 1, delay: 2 }}
+                    style={headerFont}>
+                  Real Flights
+              </motion.span>
+
+      </motion.div>;
 }
 
