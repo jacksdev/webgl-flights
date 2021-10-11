@@ -8,7 +8,7 @@ import DotLoader from "react-spinners/DotLoader";
 import Airports from 'airports';
 
 import PlaneIcon from './images/plane.png';
-import arIcon from './images/ar.png';
+import arIcon from './images/airport.png';
 // Set your mapbox access token here
 const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoiamZyb2xvdiIsImEiOiJja2toaTIxOGYwMjl1MnVtbjQxcG94OG8xIn0.kI_ZUnQzjhvaOATGXkahMQ';
 
@@ -108,7 +108,7 @@ export default class App extends React.Component {
           marker: {x: 0, y: 0, width: 200, height: 200, mask: false}
         },
         getIcon: d => "marker",
-        sizeScale: 5,
+        sizeScale: 12,
         opacity: 0.9,
         getPosition: d => [d.long, d.lat],
         onHover: (d) => {
@@ -168,19 +168,19 @@ export default class App extends React.Component {
 
 
 
-  function LoadScreen(props) {
-    return <div style={loadScreenCss}>
+  // function LoadScreen(props) {
+  //   return <div style={loadScreenCss}>
       
-            <div style={loadModalCss}>
-              Loading flight data
+  //           <div style={loadModalCss}>
+  //             Loading flight data
               
-              <DotLoader color='#0c7997' css={override} size={50} />
+  //             <DotLoader color='#0c7997' css={override} size={50} />
 
-            </div>
+  //           </div>
             
 
-          </div>;
-  }
+  //         </div>;
+  // }
 
     // if(this.state.loading){
     //   return <LoadScreen />
@@ -236,11 +236,11 @@ const loadModalCss = {
   color: '#737171'
 }
 
-const infoCss = {
-  fontSize:'20px',
-  color: '#0c7997',
-  fontWeight:'bold'
-}
+// const infoCss = {
+//   fontSize:'20px',
+//   color: '#0c7997',
+//   fontWeight:'bold'
+// }
 
 const override = css`
   display: block;
