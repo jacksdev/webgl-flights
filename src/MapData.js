@@ -2,7 +2,7 @@ import React from 'react';
 import DeckGL, {IconLayer} from 'deck.gl';
 import {StaticMap} from 'react-map-gl';
 
-import { css } from "@emotion/core";
+// import { css } from "@emotion/core";
 
 import Airports from 'airports';
 
