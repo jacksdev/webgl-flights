@@ -3,7 +3,6 @@ import DeckGL, {IconLayer} from 'deck.gl';
 import {StaticMap} from 'react-map-gl';
 
 import { css } from "@emotion/core";
-import DotLoader from "react-spinners/DotLoader";
 
 import Airports from 'airports';
 
@@ -19,7 +18,7 @@ let initialViewState = {
   bearing: 23.484374999999996,
   longitude: -100.0143893527711,
   latitude: 36.96157896529295,
-  zoom: 4.5,
+  zoom: 3.8,
   pitch: 57.30605204596854
 };
 
@@ -204,18 +203,18 @@ export default class App extends React.Component {
 //   position: 'absolute',
 // };
 
-const loadModalCss = {
-  padding: '50px',
-  width: '250px',
-  textAlign: 'center',
-  top:'150px',
-  margin: '0 auto',
-  position:'relative',
-  fontFamily:'Lato',
-  fontSize:'20px',
-  fontWeight:'400',
-  color: '#737171'
-}
+// const loadModalCss = {
+//   padding: '50px',
+//   width: '250px',
+//   textAlign: 'center',
+//   top:'150px',
+//   margin: '0 auto',
+//   position:'relative',
+//   fontFamily:'Lato',
+//   fontSize:'20px',
+//   fontWeight:'400',
+//   color: '#737171'
+// }
 
 // const infoCss = {
 //   fontSize:'20px',
@@ -223,9 +222,9 @@ const loadModalCss = {
 //   fontWeight:'bold'
 // }
 
-const override = css`
+// const override = css`
 
-  display: block;
-  margin: 300px auto;
-  color: #01a7f9;
-`;
+//   display: block;
+//   margin: 300px auto;
+//   color: #01a7f9;
+// `;
