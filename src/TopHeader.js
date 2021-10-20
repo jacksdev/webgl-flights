@@ -50,14 +50,14 @@ export default function TopHeader() {
                     animate={{opacity:1}}
                     transition={{ duration: 1, delay: 2 }}
                     style={headerFont}>
-                  &#9992; / Real Flights 
+                  &#9992; Flights 
               </motion.span>
 
               <motion.span 
                     animate={{opacity:1}}
                     transition={{ duration: 1, delay: 3, yoyo:Infinity}}
                     style={headerLoading}>
-                  Loading flight data / airports...
+                  Loading data...
               </motion.span>
 
       </motion.div>;
