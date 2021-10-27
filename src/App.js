@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 
 import TopHeader from './TopHeader';
+import MapBox from './MapBox';
 import MapData from './MapData';
 import Footer from './Footer';
 
@@ -12,7 +13,8 @@ export default function App() {
     return (
         <>    
         <TopHeader />
-        <MapData />
+        <MapBox />
+        {/* <MapData /> */}
         <Footer />
         </>
       );
