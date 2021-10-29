@@ -30,18 +30,11 @@ export default class App extends React.Component {
     loading:true,
     planes: [],
     airports:[],
-    hoveredPlane:{
-      
-    },
-    hoveredAirport:{
-      name: '',
-      lat:'',
-      long:''
-    }
+    hoveredPlane:{},
+    hoveredAirport:{}
   }
   
   componentDidMount(){
-
     this.fetchFlightData()
 		this.setAirports();
   }
@@ -115,23 +108,21 @@ export default class App extends React.Component {
         getPosition: d => [d.long, d.lat],
         onHover: (d) => {
 
+          console.log(d.picked)
+
           if(d.object){
-            console.log(d.object.name)
+            // console.log(d.object.name)
+
+            this.setState((state) => {
+              // Important: read `state` instead of `this.state` when updating.
+              return {hoveredAirport:{
+                name: d.object.name,
+                xC:d.x,
+                yC:d.y
+              }}
+            });
+
           }
-      
-          
-        
-          // if(d){
-  
-          //   this.setState((state) => {
-          //     // Important: read `state` instead of `this.state` when updating.
-          //     return {hoveredAirport:{
-          //       name: d.iata,
-          //       lat: d.lat,
-          //       long: d.long
-          //     }}
-          //   });
-          // }
         
         }
       }),
@@ -189,8 +180,14 @@ export default class App extends React.Component {
 		{ this.state.hoveredPlane.ico &&
       <div style={{position: 'absolute', zIndex: 1, pointerEvents: 'none', left: this.state.hoveredPlane.xC, top: this.state.hoveredPlane.yC, background: '#ffffff', padding: '15px'}}>
       Flight: <b>{ this.state.hoveredPlane.ico }</b> <br />
-      Speed: <b>{ Math.floor(this.state.hoveredPlane.velocity * 1.15) } miles/h</b> <br />
+      Speed: <b>{ Math.floor(this.state.hoveredPlane.velocity * 1.15077945) } miles/h</b> <br />
       Altitude: <b>{ this.state.hoveredPlane.altitude && Math.floor(this.state.hoveredPlane.altitude).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } feet</b> <br />
+    </div>
+    }
+
+    { this.state.hoveredAirport.name &&
+      <div style={{position: 'absolute', zIndex: 1, pointerEvents: 'none', left: this.state.hoveredAirport.xC, top: this.state.hoveredAirport.yC, background: '#ffffff', padding: '15px'}}>
+      Airport: <b>{ this.state.hoveredAirport.name }</b> 
     </div>
     }
 		
