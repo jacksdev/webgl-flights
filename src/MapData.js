@@ -30,8 +30,19 @@ export default class App extends React.Component {
     loading:true,
     planes: [],
     airports:[],
-    hoveredPlane:{},
-    hoveredAirport:{}
+    hoveredPlane:{
+      ico: '',
+      callsign: null,
+      velocity: null,
+      altitude: null,
+      xC:null,
+      yC:null
+    },
+    hoveredAirport:{
+      name: '',
+      xC: null,
+      yC: null
+    }
   }
   
   componentDidMount(){
@@ -115,10 +126,11 @@ export default class App extends React.Component {
 
             this.setState((state) => {
               // Important: read `state` instead of `this.state` when updating.
-              return {hoveredAirport:{
+              return {
+                hoveredAirport:{
                 name: d.object.name,
-                xC:d.x,
-                yC:d.y
+                xC: d.x,
+                yC: d.y
               }}
             });
 
@@ -152,8 +164,8 @@ export default class App extends React.Component {
               callsign: d.object.callsign,
               velocity: d.object.velocity,
               altitude: d.object.alt,
-              xC:d.x,
-              yC:d.y
+              xC: d.x,
+              yC: d.y
             }}
           });
         }
@@ -170,14 +182,8 @@ export default class App extends React.Component {
 		{/* if(this.state.loading){
       <DotLoader color='#0c7997' css={override} size={50} />
     } */}
-		
-		<DeckGL
-			initialViewState={initialViewState}
-			controller={true}
-			layers={layers}
-		> 
 
-		{ this.state.hoveredPlane.ico &&
+    { this.state.hoveredPlane.ico &&
       <div style={{position: 'absolute', zIndex: 1, pointerEvents: 'none', left: this.state.hoveredPlane.xC, top: this.state.hoveredPlane.yC, background: '#ffffff', padding: '15px'}}>
       Flight: <b>{ this.state.hoveredPlane.ico }</b> <br />
       Speed: <b>{ Math.floor(this.state.hoveredPlane.velocity * 1.15077945) } miles/h</b> <br />
@@ -190,6 +196,14 @@ export default class App extends React.Component {
       Airport: <b>{ this.state.hoveredAirport.name }</b> 
     </div>
     }
+		
+		<DeckGL
+			initialViewState={initialViewState}
+			controller={true}
+			layers={layers}
+		> 
+
+		
 		
 		<StaticMap  mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
 
