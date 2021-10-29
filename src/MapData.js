@@ -31,7 +31,7 @@ export default class App extends React.Component {
     planes: [],
     airports:[],
     hoveredPlane:{
-      ico: ''
+      
     },
     hoveredAirport:{
       name: '',
@@ -152,13 +152,17 @@ export default class App extends React.Component {
       
         if(d.object){
 
+          // console.log(d.x + ' ' + d.y)
+    
           this.setState((state) => {
             // Important: read `state` instead of `this.state` when updating.
             return {hoveredPlane:{
               ico: d.object.ico24,
               callsign: d.object.callsign,
               velocity: d.object.velocity,
-              alt: d.object.alt
+              altitude: d.object.alt,
+              xC:d.x,
+              yC:d.y
             }}
           });
         }
@@ -181,11 +185,16 @@ export default class App extends React.Component {
 			controller={true}
 			layers={layers}
 		> 
-		
+
+		{ this.state.hoveredPlane.ico &&
+      <div style={{position: 'absolute', zIndex: 1, pointerEvents: 'none', left: this.state.hoveredPlane.xC, top: this.state.hoveredPlane.yC, background: '#ffffff', padding: '15px'}}>
+      Flight: <b>{ this.state.hoveredPlane.ico }</b> <br />
+      Speed: <b>{ Math.floor(this.state.hoveredPlane.velocity * 1.15) } miles/h</b> <br />
+      Altitude: <b>{ this.state.hoveredPlane.altitude && Math.floor(this.state.hoveredPlane.altitude).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } feet</b> <br />
+    </div>
+    }
 		
 		<StaticMap  mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
-
-			{/* <Welcome plane={this.state.hoveredPlane} />   */}
 
 			
 		</DeckGL>
