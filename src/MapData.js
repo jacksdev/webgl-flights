@@ -121,7 +121,7 @@ export default class App extends React.Component {
 
           console.log(d.picked)
 
-          if(d.object){
+          if(d.picked){
             // console.log(d.object.name)
 
             this.setState((state) => {
@@ -133,8 +133,19 @@ export default class App extends React.Component {
                 yC: d.y
               }}
             });
-
           }
+
+          if(d.picked === false){
+            this.setState(
+              (state) => {
+                return {
+                  hoveredAirport: {}
+                }
+              }
+            )
+          }
+
+
         
         }
       }),
@@ -153,10 +164,7 @@ export default class App extends React.Component {
       getAngle: d => 65 + (d.true_track * 180) / Math.PI,
       onHover: (d) => {
       
-        if(d.object){
-
-          // console.log(d.x + ' ' + d.y)
-    
+        if(d.picked){
           this.setState((state) => {
             // Important: read `state` instead of `this.state` when updating.
             return {hoveredPlane:{
@@ -168,6 +176,16 @@ export default class App extends React.Component {
               yC: d.y
             }}
           });
+        }
+
+        if(d.picked === false){
+          this.setState(
+            (state) => {
+              return {
+                hoveredPlane: {}
+              }
+            }
+          )
         }
       
       }
