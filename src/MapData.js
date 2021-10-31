@@ -111,10 +111,10 @@ export default class App extends React.Component {
         pickable: true,
         iconAtlas: arIcon,
         iconMapping: {
-          marker: {x: 0, y: 0, width: 200, height: 200, mask: false}
+          marker: {x: 0, y: 0, width: 150, height: 150, mask: false}
         },
         getIcon: d => "marker",
-        sizeScale: 12,
+        sizeScale: 10,
         opacity: 0.9,
         getPosition: d => [d.long, d.lat],
         onHover: (d) => {
