@@ -167,14 +167,14 @@ export default class App extends React.Component {
         if(d.picked){
           
           
-          fetch(`https://opensky-network.org/api/tracks/all?icao24=${d.object.ico24}&time=0`)
-          .then(res => res.json())
-          .then(function(myJson) {      
-              console.log(myJson)
-          })
-          .catch((error) => {
-            console.error('Error:', error);
-          });
+          // fetch(`https://opensky-network.org/api/tracks/all?icao24=${d.object.ico24}&time=0`)
+          // .then(res => res.json())
+          // .then(function(myJson) {      
+          //     console.log(myJson)
+          // })
+          // .catch((error) => {
+          //   console.error('Error:', error);
+          // });
 
 
           this.setState((state) => {
