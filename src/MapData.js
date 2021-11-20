@@ -165,6 +165,18 @@ export default class App extends React.Component {
       onHover: (d) => {
       
         if(d.picked){
+          
+          
+          fetch(`https://opensky-network.org/api/tracks/all?icao24=${d.object.ico24}&time=0`)
+          .then(res => res.json())
+          .then(function(myJson) {      
+              console.log(myJson)
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+          });
+
+
           this.setState((state) => {
             // Important: read `state` instead of `this.state` when updating.
             return {hoveredPlane:{
@@ -203,8 +215,8 @@ export default class App extends React.Component {
 
     { this.state.hoveredPlane.ico &&
       <div style={{position: 'absolute', zIndex: 1, pointerEvents: 'none', left: this.state.hoveredPlane.xC, top: this.state.hoveredPlane.yC, background: '#ffffff', padding: '15px'}}>
-      Flight: <b>{ this.state.hoveredPlane.ico }</b> <br />
-      Speed: <b>{ Math.floor(this.state.hoveredPlane.velocity * 1.15077945) } miles/h</b> <br />
+      Aircraft: <b>{ this.state.hoveredPlane.ico }</b> <br />
+      Speed: <b>{ this.state.hoveredPlane.velocity } knots</b> <br />
       Altitude: <b>{ this.state.hoveredPlane.altitude && Math.floor(this.state.hoveredPlane.altitude).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") } feet</b> <br />
     </div>
     }

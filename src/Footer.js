@@ -4,6 +4,8 @@ import gitImg from './images/git.png';
 
 const footerCss = {
 	position:'absolute',
+  display: 'flex',
+  justifyContent:'space-between',
 	bottom:'-50px',
   height:'50px',
 	width:'100%',
@@ -24,6 +26,18 @@ const socialLinksCss = {
   opacity:'0',
 }
 
+const headerLoading = {
+  fontFamily:'Merriweather',
+  display:'inline-block',
+  fontSize:'15px',
+  lineHeight:'32px',
+  paddingTop:'10px',
+  paddingRight:'20px',
+  color:'#9c9c9c',
+  opacity:'0'
+  // border:'1px solid red'
+}
+
 
 export default function TopHeader() {
   return <motion.div  
@@ -37,7 +51,14 @@ export default function TopHeader() {
                     style={socialLinksCss}>
                   <a href='https://github.com/jacksdev/webgl-flight-tracker' rel="noopener noreferrer" target='_blank'><img src={gitImg} width='20px' border='0' alt='GitHub link' /> </a>
 
-              </motion.div>
+            </motion.div>
+
+            <motion.span 
+                  animate={{opacity:1}}
+                  transition={{ duration: 1, delay: 3, yoyo:Infinity}}
+                  style={headerLoading}>
+                Loading data...
+            </motion.span>
 
       </motion.div>;
 }

@@ -8,7 +8,6 @@ const topHeader = {
   display:'flex',
   justifyContent:'space-between',
   height: '80px',
-  width: '100%',
   top:'-80px',
   background:'#fff',
   zIndex: 5,
@@ -20,24 +19,26 @@ const headerFont = {
   display:'inline-block',
   fontSize:'20px',
   lineHeight:'32px',
-  paddingTop:'30px',
+  paddingTop:'20px',
   paddingLeft:'20px',
+  paddingRight:'30px',
   color:'#9c9c9c',
   opacity:'0'
   // border:'1px solid red'
 }
 
-const headerLoading = {
-  fontFamily:'Merriweather',
-  display:'inline-block',
-  fontSize:'15px',
-  lineHeight:'32px',
-  paddingTop:'30px',
-  paddingRight:'20px',
-  color:'#9c9c9c',
-  opacity:'0'
-  // border:'1px solid red'
-}
+
+// const headerLoading = {
+//   fontFamily:'Merriweather',
+//   display:'inline-block',
+//   fontSize:'15px',
+//   lineHeight:'32px',
+//   paddingTop:'30px',
+//   paddingRight:'20px',
+//   color:'#9c9c9c',
+//   opacity:'0'
+//   // border:'1px solid red'
+// }
 
 
 export default function TopHeader() {
@@ -50,15 +51,15 @@ export default function TopHeader() {
                     animate={{opacity:1}}
                     transition={{ duration: 1, delay: 2 }}
                     style={headerFont}>
-                  &#9992; Flights 
+                  &#9992; / Flights 
               </motion.span>
 
-              <motion.span 
+              {/* <motion.span 
                     animate={{opacity:1}}
                     transition={{ duration: 1, delay: 3, yoyo:Infinity}}
                     style={headerLoading}>
                   Loading data...
-              </motion.span>
+              </motion.span> */}
 
       </motion.div>;
 }
