@@ -2,7 +2,6 @@ import React from 'react';
 import DeckGL, {IconLayer} from 'deck.gl';
 import {StaticMap} from 'react-map-gl';
 
-import { motion } from "framer-motion";
 
 // import { css } from "@emotion/core";
 
@@ -306,15 +305,3 @@ export default class App extends React.Component {
 //   color: #01a7f9;
 // `;
 
-
-const headerLoading = {
-  fontFamily:'Merriweather',
-  display:'inline-block',
-  fontSize:'15px',
-  lineHeight:'32px',
-  paddingTop:'10px',
-  paddingRight:'20px',
-  color:'#9c9c9c',
-  opacity:'0'
-  // border:'1px solid red'
-}
