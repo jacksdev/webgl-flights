@@ -2,6 +2,8 @@ import React from 'react';
 import DeckGL, {IconLayer} from 'deck.gl';
 import {StaticMap} from 'react-map-gl';
 
+import { motion } from "framer-motion";
+
 // import { css } from "@emotion/core";
 
 import Airports from 'airports';
@@ -22,12 +24,15 @@ let initialViewState = {
   pitch: 57.30605204596854
 };
 
+
+
 // Data to be used by the LineLayer
 
 export default class App extends React.Component {
 
   state = {
     loading:true,
+    error:false,
     planes: [],
     airports:[],
     hoveredPlane:{
@@ -95,7 +100,18 @@ export default class App extends React.Component {
       })
     })
 		.catch((error) => {
+      console.log("ERROR")
 			console.error('Error:', error);
+
+      this.setState(
+        (state) => {
+          return {
+            error: true
+          }
+        }
+      )
+
+      
 		});
     setTimeout(this.fetchFlightData, 10 * 1000)
   }
@@ -213,6 +229,17 @@ export default class App extends React.Component {
       <DotLoader color='#0c7997' css={override} size={50} />
     } */}
 
+    <br />
+
+    { this.state.error &&
+      <div style={{position: 'absolute', display: 'block', justifyContent: 'center', zIndex: 1, pointerEvents: 'none', left: 'auto', top: '30%', background: '#ffffff', padding: '15px'}}>
+      API ERROR: <b>Too many calls to API today...try back tomorrow</b> <br />
+    </div>
+    }
+
+         
+
+
     { this.state.hoveredPlane.ico &&
       <div style={{position: 'absolute', zIndex: 1, pointerEvents: 'none', left: this.state.hoveredPlane.xC, top: this.state.hoveredPlane.yC, background: '#ffffff', padding: '15px'}}>
       Aircraft: <b>{ this.state.hoveredPlane.ico }</b> <br />
@@ -278,3 +305,16 @@ export default class App extends React.Component {
 //   margin: 300px auto;
 //   color: #01a7f9;
 // `;
+
+
+const headerLoading = {
+  fontFamily:'Merriweather',
+  display:'inline-block',
+  fontSize:'15px',
+  lineHeight:'32px',
+  paddingTop:'10px',
+  paddingRight:'20px',
+  color:'#9c9c9c',
+  opacity:'0'
+  // border:'1px solid red'
+}
