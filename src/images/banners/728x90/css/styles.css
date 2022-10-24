@@ -1,0 +1,146 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+html {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+
+#containerMain{
+
+ position: relative;
+  width: 727px;
+  height: 89px;
+  cursor: pointer;
+  border: 1px solid #222222;
+  overflow: hidden;
+
+}
+
+
+
+
+#t1{
+
+  position: absolute;
+  background: url(../img/t1.png) no-repeat; 
+  width: 196px; 
+  height:53px;
+  top: 20px;
+  left: 29px;
+  opacity: 0;
+
+}
+
+
+#t2{
+
+  position: absolute;
+  background: url(../img/t2.png) no-repeat; 
+  width: 191px; 
+  height:37px;
+  top: 25px;
+  left: 256px;
+  opacity: 0;
+
+}
+
+#cta{
+
+  position: absolute;
+  background: url(../img/cta.png) no-repeat; 
+  width: 112px; 
+  height:42px;
+  top: 23px;
+  left: 478px;
+  opacity:0;
+
+}
+
+#logo{
+
+  position: absolute;
+
+  background: url(../img/logo.png) no-repeat; 
+  width: 75px; 
+  height:57px;
+
+  top:15px;
+  left:648px;
+  opacity:0;
+
+}
+
+
+#sidebar{
+
+  position: absolute;
+
+  background: url(../img/sidebar.png) no-repeat; 
+  width: 30px; 
+  height:90px;
+  left:698px;
+  opacity: 100;
+
+}
+
+
+#bg{
+
+  position: absolute;
+
+  background: url(../img/bg.png) no-repeat; 
+  width: 728px; 
+  height:90px;
+
+  opacity: 100;
+
+}
