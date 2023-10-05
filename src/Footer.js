@@ -49,7 +49,7 @@ export default function TopHeader() {
                     animate={{opacity:1}}
                     transition={{ duration: 1, delay: 2 }}
                     style={socialLinksCss}>
-                  <a href='https://github.com/jacksdev/webgl-flight-tracker' rel="noopener noreferrer" target='_blank'><img src={gitImg} width='20px' border='0' alt='GitHub link' /> </a>
+                  {/* <a href='https://github.com/jacksdev/webgl-flight-tracker' rel="noopener noreferrer" target='_blank'><img src={gitImg} width='20px' border='0' alt='GitHub link' /> </a> */}
 
             </motion.div>
 
