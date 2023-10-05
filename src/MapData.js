@@ -82,6 +82,8 @@ export default class App extends React.Component {
 
       let data = myJson.states;
 
+      console.log(data)
+
 			
 
       return app.setState({
