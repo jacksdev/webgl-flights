@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from "framer-motion";
-import gitImg from './images/git.png';
+// import gitImg from './images/git.png';
 
 const footerCss = {
 	position:'absolute',
