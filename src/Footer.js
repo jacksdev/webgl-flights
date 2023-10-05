@@ -15,16 +15,7 @@ const footerCss = {
 }
 
 
-const socialLinksCss = {
-  fontFamily:'Merriweather',
-  display:'inline-block',
-  fontSize:'10px',
-  lineHeight:'12px',
-  paddingTop:'15px',
-  paddingLeft:'20px',
-  color:'#9c9c9c',
-  opacity:'0',
-}
+
 
 const headerLoading = {
   fontFamily:'Merriweather',
