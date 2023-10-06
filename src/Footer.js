@@ -24,6 +24,7 @@ const headerLoading = {
   lineHeight:'32px',
   paddingTop:'10px',
   paddingRight:'20px',
+  paddingLeft:'20px',
   color:'#9c9c9c',
   opacity:'0'
   // border:'1px solid red'
